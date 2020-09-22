@@ -1,4 +1,4 @@
-# The Budget Web App
+# The Budget Web App - Quick Wins
 This budget app allows us to add incomes and expenses for a certain month. The app calculates how much money we've made and how much we've spent. Then it gives us a nice budget at the top of this app, which will either be a positive or negative number.
 
 During The Complete JavaScript 2020 Course, I used JavaScript ES5 to develop this Budget web app, following a long with the instructor "Jonas Schmedtmann".

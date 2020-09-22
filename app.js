@@ -514,7 +514,6 @@ console.log(DOM.inputBtn);
         UICtrl.displayPercentages(percentages);
     };
     
-    
 
 
     // ctrlAddItem function. In a funtion that will be called when either of these actions happen/ when we want to add a new item.
