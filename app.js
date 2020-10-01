@@ -431,7 +431,7 @@ if (document.getElementById("exp").selectedIndex == "0") {
             document.querySelector(DOMstrings.dateLabel).textContent = months[month] + ' ' + year;
         },
 // add the changeType method:
-        changedType: function() {
+        changedTypeInc: function() {
             // do some style manipulations: add or remove some CSS classes. 
             // Select the 3 elements that is going to receive the focus class and the button to give it the red class. Will receive the red focus class. Constructing a string.
             var fields = document.querySelectorAll(
