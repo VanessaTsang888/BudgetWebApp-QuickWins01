@@ -244,14 +244,14 @@ var UIController = (function() {
         }
     };
 
-// ADD THE 2 INPUTS IN getInput:
+// ADDED THE 2 NEW INPUTS IN TO THE METHOD: getInput:
     // The controller below will call this Method and it wants to receive back all of these values.
     return {
         getInput: function() {
             return {
 // 2 Combo Boxes - Add the 2 inputs that I've just created in the HTML file:
             type__inc: document.querySelector(DOMstrings.inputType).value, // We read the value of the type. Will be either inc or exp. Will passed into the add item method, we expect either inc or exp.
-            type__exp: document.querySelector(DOMstrings.inputType).value, // We read the value of the type. Will be either inc or exp. Will passed into the add item method, we expect either inc or exp.
+            type__exp: document.querySelector(DOMstrings.inputType).value,
             description: document.querySelector(DOMstrings.inputDescription).value,
             value: parseFloat(document.querySelector(DOMstrings.inputValue).value) // Use a function called parseFloat to convert a string into a decimal number. So this function will take this string here:
             };
