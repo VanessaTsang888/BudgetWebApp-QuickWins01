@@ -249,7 +249,9 @@ var UIController = (function() {
     return {
         getInput: function() {
             return {
-            type: document.querySelector(DOMstrings.inputType).value, // We read the value of the type. Will be either inc or exp. Will passed into the add item method, we expect either inc or exp.
+// 2 Combo Boxes - Add the 2 inputs that I've just created in the HTML file:
+            type__inc: document.querySelector(DOMstrings.inputType).value, // We read the value of the type. Will be either inc or exp. Will passed into the add item method, we expect either inc or exp.
+            type__exp: document.querySelector(DOMstrings.inputType).value, // We read the value of the type. Will be either inc or exp. Will passed into the add item method, we expect either inc or exp.
             description: document.querySelector(DOMstrings.inputDescription).value,
             value: parseFloat(document.querySelector(DOMstrings.inputValue).value) // Use a function called parseFloat to convert a string into a decimal number. So this function will take this string here:
             };
