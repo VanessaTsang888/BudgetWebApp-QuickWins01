@@ -244,7 +244,7 @@ var UIController = (function() {
         }
     };
 
-
+// ADD THE 2 INPUTS IN getInput:
     // The controller below will call this Method and it wants to receive back all of these values.
     return {
         getInput: function() {
@@ -334,28 +334,32 @@ var UIController = (function() {
 // Method to display our budget in the UI. We need Object where all these data will be stored.
 // if object && object.budget && object.budget.type 
         displayBudget: function(obj) {
-            var type;
+            // Declaring local variables but not assigning them to anything.
+            var type, currentImage;
 // I'm setting the varable for the current class list.
-            var currentImage = document.getElementById('topHeaderImg').classList;
+            currentImage = document.getElementById('topHeaderImg').classList;
 // Just testing to see what is in the classList CSS.
             console.log(currentImage);
 
-            // Ternary Operator: this is where the imgName gets set.
+            // Ternary Operator: this is where the headerImgClass gets set.
             // The budget logic:
-            // imgName is what the new class will be.
-            // find and replace imgName and call it newClass - refactor.
+            // headerImgClass is what the new class will be.
+            // find and replace headerImgClass and call it newClass - refactor.
             // In css, I have 3 classes now > top, top2, top3.
-            obj.budget > 0 ? (type = 'inc', imgName = 'top2')
-            : (type = 'exp', imgName = 'top3')
+            obj.budget > 0 ? (type = 'inc', headerImgClass = 'top2')
+            : (type = 'exp', headerImgClass = 'top3')
 
             // Formating the number with decimal points, and setting to the type:
+            // Using querySelector to get the right textContent to update. The formatNumber taking the arguments to do something then assigns to the textContent.
+            // document.querySelector is looking for the budget__value, then the textConent gets a new value. formatNumber taking the values of the 2 arguments
+            // then assigns it to the textContent.
             document.querySelector(DOMstrings.budgetLabel).textContent = formatNumber(obj.budget, type);
             document.querySelector(DOMstrings.incomeLabel).textContent = formatNumber(obj.totalInc, 'inc');
             document.querySelector(DOMstrings.expensesLabel).textContent = formatNumber(obj.totalExp, 'exp');
 
-// Calling Function: changeImage with argument of: imgName, currentImage, so whatever this is set to, its calling that function with the budget logic:
+// Calling Function: changeImage with argument of: headerImgClass, currentImage, so whatever this is set to, its calling that function with the budget logic:
 // Rename currentImage to currentClass - use refactor:
-            changeImage(imgName, currentImage);
+            changeImage(headerImgClass, currentImage);
             
 
             // If its not -1 then we want to add the % sign. so if its 30, we want to display 30%, but if it's -1 we want to display something else.
@@ -431,17 +435,17 @@ var UIController = (function() {
 ////////////////////////////////////////////////////* HEADER IMAGE CHANGE - QUICK WINS 01 *////////////////////////////////////////////////////////////////////////////////
 
 // This function changes the Header image according to the positive or negative number > div.budget_value :
-// Now I know the Ternary logic is working. The imgName is correct as it changing the path/ header image which I've checked using the console.log() statement.
+// Now I know the Ternary logic is working. The headerImgClass is correct as it changing the path/ header image which I've checked using the console.log() statement.
 // Now Trying to set the image in the CSS class - this was very hard work!
 // this function is being declared here and called by the function called: displayBudget (above).
 
-changeImage = function changeImage(imgName, currentImage) {
+changeImage = function changeImage(headerImgClass, currentImage) {
 
 // Changing class by switching between classes which will re-render the whole page?
-    var image = document.getElementById('topHeaderImg').classList.replace(currentImage, imgName);
+    var image = document.getElementById('topHeaderImg').classList.replace(currentImage, headerImgClass);
 
 // Testing to see what is inside these arguments:
-    console.log(image, imgName, currentImage);
+    console.log(image, headerImgClass, currentImage);
 
  };
 
@@ -461,6 +465,7 @@ console.log(DOM.inputBtn);
     var setupEventListeners = function() {
         // pass-in the ctrlAddItem function. So when user press the button this function gets called.
         // DOM.inputBtn is our DOM Elements for our event listeners.
+ // Use this for my 2 ComboBoxes Quick Win:       
     document.querySelector(DOM.inputBtn).addEventListener('click', ctrlAddItem);
 
     // Not just a click event but also a key-press event for when the user use the enter key.
@@ -482,7 +487,7 @@ console.log(DOM.inputBtn);
     };
 
 
-    
+// Use this for my 2 ComboBoxes Quick Win:         
 // We need a function to update the Budget Controller. This whole updatBudget function is called each time the user enter a new item into the UI
     var updateBudget = function() {
 
