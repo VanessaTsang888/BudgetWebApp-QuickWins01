@@ -83,6 +83,16 @@ return {
         }
         
         // 2. CREATE NEW ITEM BASED ON 'exp' or 'inc' type: 
+        // If the user selects an item from the Income combo-box, then the Expenses combo-box will become inactive, so set to 0:
+        if (document.getElementById("inc").selectedIndex == "0") {
+            type = 'exp';
+        };
+        // If the user selects an item from the Expenses combo-box, then the Income combo-box will become inactive, so set to 0:
+        if (document.getElementById("exp").selectedIndex == "0") {
+            type = 'inc';
+        };
+        
+        
         if (type === 'exp') {
             newItem = new Expense(ID, des, val); // Why is the instructor call 'des' designation rather than description?
         // If the input is an income, the we want to create an income object:
@@ -189,6 +199,8 @@ var UIController = (function() {
 // easily, if and when need to.
 // Method 
     var DOMstrings = {
+        // Only one combo box can be selected at one time:
+        removeType: '.remove__type',
         inputType: '.add__type',
         inputDescription: '.add__description',
         inputValue: '.add__value',
@@ -250,8 +262,7 @@ var UIController = (function() {
         getInput: function() {
             return {
 // 2 Combo Boxes - Add the 2 inputs that I've just created in the HTML file:
-            type__inc: document.querySelector(DOMstrings.inputType).value, // We read the value of the type. Will be either inc or exp. Will passed into the add item method, we expect either inc or exp.
-            type__exp: document.querySelector(DOMstrings.inputType).value,
+            type: document.querySelector(DOMstrings.inputType).value, // We read the value of the type. Will be either inc or exp. Will passed into the add item method, we expect either inc or exp.
             description: document.querySelector(DOMstrings.inputDescription).value,
             value: parseFloat(document.querySelector(DOMstrings.inputValue).value) // Use a function called parseFloat to convert a string into a decimal number. So this function will take this string here:
             };
@@ -263,6 +274,16 @@ var UIController = (function() {
         addListItem: function(obj, type) {
                 var html, newHtml, element;
                 // Create HTML string with placeholder text. %id% will be replaced with the actual data from the object.
+                // Checking current index against the combo-boxes:
+                // Find out how this function is been called, then change the type: i.e. ternary opportator. Move to where the addListItem is called. 
+if (document.getElementById("inc").selectedIndex == "0") {
+    type = 'exp';
+}
+
+if (document.getElementById("exp").selectedIndex == "0") {
+    type = 'inc';
+}
+
 
                 if (type === 'inc') {
                     element = DOMstrings.incomeContainer;
@@ -420,12 +441,46 @@ var UIController = (function() {
                 // will return a node list:
             nodeListForEach(fields, function(cur) {
                 cur.classList.toggle('red-focus');
+
+// Sets the Expenses combo-box to '0' when the Income combo-box is selected:
+                document.getElementById("exp").selectedIndex="0";
+
+                console.log("Changed to income");
+
             });
 
             // Add the red class on our button: 
             document.querySelector(DOMstrings.inputBtn).classList.toggle('red');
 
         },
+
+        // add the changedTypeExp method:
+        changedTypeExp: function() {
+            // do some style manipulations: add or remove some CSS classes. 
+            // Select the 3 elements that is going to receive the focus class and the button to give it the red class. Will receive the red focus class. Constructing a string.
+            var fields = document.querySelectorAll(
+                DOMstrings.inputType + ',' +
+                DOMstrings.inputDescription + ',' +
+                DOMstrings.inputValue);
+                // will return a node list:
+            nodeListForEach(fields, function(cur) {
+                cur.classList.toggle('red-focus');
+
+
+// Sets the Expenses combo-box to '0' when the Income combo-box is selected:
+                document.getElementById("inc").selectedIndex="0";
+
+                console.log("Changed to expenses");
+
+            });
+
+            // Add the red class on our button: 
+            document.querySelector(DOMstrings.inputBtn).classList.toggle('red');
+
+        },
+
+
+// changedTypeExp is a new function. When user selects the Income combo-box then 
 
         // Get the DOM strings. Return our DOMstrings from private DOMstrings into the public. Now exposing the DOMstrings object into the public.
         getDOMstrings: function() {
@@ -467,8 +522,9 @@ console.log(DOM.inputBtn);
     var setupEventListeners = function() {
         // pass-in the ctrlAddItem function. So when user press the button this function gets called.
         // DOM.inputBtn is our DOM Elements for our event listeners.
- // Use this for my 2 ComboBoxes Quick Win:       
+ // 2 ComboBoxes Quick Win: Add the 2 new inputs:       
     document.querySelector(DOM.inputBtn).addEventListener('click', ctrlAddItem);
+    document.querySelector(DOM.removeType).addEventListener('change', UICtrl.changedTypeExp);
 
     // Not just a click event but also a key-press event for when the user use the enter key.
     

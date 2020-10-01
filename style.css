@@ -144,7 +144,19 @@ body {
 }
 
 .add__type {
-    width: 55px;
+    width: 230px;
+    border: 1px solid #e7e7e7;
+    height: 44px;
+    font-size: 18px;
+    color: inherit;
+    background-color: #fff;
+    margin-right: 10px;
+    font-weight: 300;
+    transition: border 0.3s;
+}
+
+.remove__type {
+    width: 230px;
     border: 1px solid #e7e7e7;
     height: 44px;
     font-size: 18px;
